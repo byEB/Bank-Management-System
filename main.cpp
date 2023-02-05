@@ -1,7 +1,8 @@
 #include <iostream>
-#include <sqlite3.h>
+
 #include <user.h>
 #include <memory>
+#include <bankmanager.h>
 
 
 
@@ -15,34 +16,6 @@ void banking_intro()
     std::cout<<"\n\n\n";
 }
 
-
-/// @brief bu unique mi olsun bilemedim 
-class Database
-{
-private:
-    sqlite3* db_;
-
-public:
-    Database(const std::string& databaseName){
-        std::cout<<"database is creating..."<<std::endl;
-        int rc = sqlite3_open("test.db", &db_);
-        if(rc!=SQLITE_OK) throw std::runtime_error("error "+ std::to_string(sqlite3_errcode(db_)));
-    }
-    void InsertNewUser();
-    bool CheckUser();
-};
-
-
-class Manager
-{
-private:
-    std::shared_ptr<User> user;
-    Database db;
-
-public:
-    Manager(const std::string& dbName):db(dbName){}
-
-};
 
 
 
