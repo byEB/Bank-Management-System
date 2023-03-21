@@ -21,13 +21,11 @@ bool AccountManager::SignIn(std::string email, std::string password)
 }
 
 
-void AccountManager::PrintAccountInfos()
+std::string AccountManager::getAccountType()
 {
     UserInfo info;
     info.personelInfo = accountPtr->GetAccountInfo();
-    std::cout<<"Hello : "<<info.personelInfo.name<<std::endl;
-
-    
+    return info.personelInfo.accountType;
 }
 
 bool AccountManager::ExitAccount()

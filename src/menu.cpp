@@ -48,7 +48,7 @@ void BaseMenu::MainScreenMenu()
 void  BaseMenu::AdminSecreenMenu()
 {
     std::cout<<"//=//=//=//=//=//=//=//=//=//=//=//=//=//=//";
-    std::cout<<"\n//\t\tSELECT AND PROCESS\t\t  //";
+    std::cout<<"\n//\t\tSELECT ANY PROCESS\t\t  //";
     std::cout<<"\n//=//=//=//=//=//=//=//=//=//=//=//=//=//=//";
     std::cout<<"\n\n\t1>  ADD NEW ACCOUNT";
     std::cout<<"\n\t2>  EDIT ACCOUNT";
@@ -62,20 +62,83 @@ void BaseMenu::CustomerSecreenMenu()
     //not defined
 }
 
+void BaseMenu::AdminMenuRunner()
+{
+
+}
+
+
+
 void BaseMenu::MainMenuRunner()
 {
-    while(!stopped.load())
-    {	
-        // std::unique_lock<std::mutex> lock(menuMtx_);
-        MainIntro();
-        switch (currentMenuTypes_)
-        {
+    // std::unique_lock<std::mutex> lock(menuMtx_);
+    switch(opt)
+    {
+        case 1:
+            std::cout<<"create account"<<std::endl;
+            break;
+        case 2:
+            {
+                CommentType_ = BankManagerCommentTypes::SIGN_IN;
+                std::string email;
+                std::string password;
+                std::cout<<"PLEASE ENTER YOUR EMAIL: "<<std::endl;
+                std::cin>>email;
+                GuiResults["email"] = email;
+                std::cout<<"PLEASE ENTER YOUR PASSWORD:";
+                std::cin>>password;
+                GuiResults["password"] = password;
+                
+                SetSgnResultsCallback_(GuiResults, CommentType_);
+                if(CheckStatusCb_())
+                {
+                    std::cout<<"you signed ..."<<std::endl;
+                    // stopped.store(true);
+                    // SendExitCb_(true);
+                }
+                else
+                {
+                    std::cout<<"you email or password is not correct please try again..."<<std::endl;
+                }
+
+            }
+            break;
+        
+        case 3:
+            std::cout<<"thanx for visiting... \n";
+            stopped.store(true);
+            SendExitCb_(true);
+            break;;
+
+        default:
+            std::cout<<"thanx for visiting..."<<std::endl;
+            break;
+    };
+        
+}
+
+void BaseMenu::menuController()
+{
+    
+    switch (currentMenuTypes_)
+    {
         case MenuTypes::MAIN_SCREEN:
+            MainIntro();
             MainScreenMenu();
-            //buraya bir macro yakışır
             OUTRO(3);
-            std::cin>>opt;
+            {
+                std::lock_guard<std::mutex> opt_lock(OptMtx_);
+                std::cin>>opt;
+            }
             checkChoice(opt);
+            if(enableChoice.load())
+            {
+                MainMenuRunner();
+            }
+            else
+            {
+                throw std::runtime_error("! enable choice ");
+            } 
             break;
         case MenuTypes::ADMIN_SCREEN:
             AdminSecreenMenu();
@@ -88,62 +151,15 @@ void BaseMenu::MainMenuRunner()
             break;
         default:
             break;
-        }
-        
-        if(enableChoice.load())
-        {
-            switch(opt)
-            {
-                case 1:
-                    std::cout<<"create account"<<std::endl;
-                    break;
-                case 2:
-                    {
-                        CommentType_ = BankManagerCommentTypes::SIGN_IN;
-                        std::string email;
-                        std::string password;
-                        std::cout<<"PLEASE ENTER YOUR EMAIL: "<<std::endl;
-                        std::cin>>email;
-                        GuiResults["email"] = email;
-                        std::cout<<"PLEASE ENTER YOUR PASSWORD:";
-                        std::cin>>password;
-                        GuiResults["password"] = password;
-                        
-                        SetSgnResultsCallback_(GuiResults, CommentType_);
-                        if(CheckStatusCb_())
-                        {
-                            std::cout<<"you signed .. "<<std::endl;
-                            {
-                                std::lock_guard<std::mutex> lock(menuMtx_);
-                                stopped.store(true);
-                                SendExitCb_(true);
-                            }
-                        }
-                        else
-                        {
-                            std::cout<<"you email or password is not correct please try again..."<<std::endl;
-                        }
-
-                    }
-                    break;
-                
-                case 3:
-                    std::cout<<"thanx for visiting... \n";
-                    stopped.store(true);
-                    SendExitCb_(true);
-                    break;;
-    
-                default:
-                    std::cout<<"thanx for visiting..."<<std::endl;
-                    break;
-            };
-        }
-        else
-        {
-            throw std::runtime_error("! enable choice ");
-        } 
-        
     }
+    
+    
+}
+
+
+void BaseMenu::SetMenuType(MenuTypes type)
+{
+    currentMenuTypes_ = type;
 }
 
 // void startMenu()

@@ -32,6 +32,12 @@ struct UserInfo
 };
 
 
+enum class AccountType
+{
+    ADMIN,
+    CUSTOMER
+};
+
 
 struct SingResuls
 {
@@ -46,9 +52,17 @@ enum class BankManagerCommentTypes
     CREATE_NEW_ACCOUNT,
     EDIT_ACCOUNT,
     DELETE_ACCOUNT,
+    WAIT,
     EXIT
 };
 
+
+enum class MenuTypes
+{
+    MAIN_SCREEN,
+    ADMIN_SCREEN,
+    CUSTOMER_SCREEN
+};
 
 
 #endif

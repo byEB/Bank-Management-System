@@ -22,15 +22,6 @@
 
 class BaseMenu
 {
-public:
-
-    enum class MenuTypes
-    {
-        MAIN_SCREEN,
-        ADMIN_SCREEN,
-        CUSTOMER_SCREEN
-    };
-
 private:
     std::atomic<bool> isCoosed = false;
     std::atomic<bool> stopped = false;
@@ -49,6 +40,7 @@ private:
 
     // std::function<bool(std::string, std::string)> SignCallback;
     std::mutex menuMtx_;
+    std::mutex OptMtx_;
     int opt = INT_MIN;
 
 public:
@@ -68,7 +60,14 @@ public:
 
     void CustomerSecreenMenu();
 
+    void menuController();
+
+    void AdminMenuRunner();
+
     void MainMenuRunner();
+
+    void SetMenuType(MenuTypes type);
+
 
     // void startMenu();
     // void exitMenu();

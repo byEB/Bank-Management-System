@@ -6,6 +6,29 @@
 #include <menu.h>
 
 
+class CommentTypes
+{
+
+public:
+    virtual void EXIT() = 0;
+};
+
+class CustomerCommetType : public CommentTypes
+{
+
+};
+
+class AdminCommentTypes : public CommentTypes
+{
+
+
+public:
+
+};
+
+
+
+
 class BankManager
 {
 private:
@@ -51,7 +74,7 @@ public:
     BankManager()
     {
         accountManagerPtr_ = std::make_unique<AccountManager>("../database/bank.sqlite3", std::bind(&BankManager::SetSignedResults, this, std::placeholders::_1));
-        menuPtr = std::make_unique<BaseMenu>(BaseMenu::MenuTypes::MAIN_SCREEN,std::bind(&BankManager::SetMenuResults, this, std::placeholders::_1, std::placeholders::_2), std::bind(&BankManager::GetSignedResult, this), std::bind(&BankManager::SetStoppedVal, this, std::placeholders::_1));
+        menuPtr = std::make_unique<BaseMenu>(MenuTypes::MAIN_SCREEN,std::bind(&BankManager::SetMenuResults, this, std::placeholders::_1, std::placeholders::_2), std::bind(&BankManager::GetSignedResult, this), std::bind(&BankManager::SetStoppedVal, this, std::placeholders::_1));
     }
 
     void BankManagerMain();
