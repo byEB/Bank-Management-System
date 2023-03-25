@@ -50,9 +50,6 @@ bool DatabaseManager::UserAuthenticate(std::string email_, std::string password_
     }
 
 
-
-
-
     UserInfo DatabaseManager::GetUserFromDatabase(std::string email, std::string password)
     {
         std::string query = "SELECT * FROM USERS WHERE email = ? AND password = ?;";
@@ -89,8 +86,15 @@ bool DatabaseManager::UserAuthenticate(std::string email_, std::string password_
 
         return infos;
     }
-
-    void SetUserToDabase()
+    bool DatabaseManager::AddNewAccount(UserInfo info)
     {
 
+        //create random userID 
+        auto check = UserAuthenticate(info.personelInfo.name, info.personelInfo.email);
+        if(!check)
+        {
+            return false;
+        }
+        std::string insert_sql =  "INSERT INTO USERS(id, name, surname, email, password, ) VALUES(?, ?);";
+        
     }

@@ -22,6 +22,8 @@
 
 class BaseMenu
 {
+    Authorization aut;
+    UserInfo newAccount;
 private:
     std::atomic<bool> isCoosed = false;
     std::atomic<bool> stopped = false;

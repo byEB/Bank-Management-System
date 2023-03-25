@@ -57,13 +57,51 @@ void  BaseMenu::AdminSecreenMenu()
 
 }
 
-void BaseMenu::CustomerSecreenMenu()
-{
-    //not defined
-}
-
 void BaseMenu::AdminMenuRunner()
 {
+    switch(opt)
+    {
+        case 1:
+            std::cout<<"New Account Adding :"<<std::endl;
+            if(aut.ableToAddNewAccount)
+            {
+                std::cout<<"PLEASE ENTER AN ACCOUNT NAME : "<<std::endl;
+                std::cin>>newAccount.personelInfo.name;
+                std::cout<<"PLEASE ENTER AN SURNAME : "<<std::endl;
+                std::cin>>newAccount.personelInfo.surname;
+                std::cout<<"PLEASE ENTER AN EMAIL : "<<std::endl;
+                std::cin>>newAccount.personelInfo.email;
+                std::cout<<"PLEASE ENTER AN ACCOUNT TYPE : "<<std::endl;
+                std::cin>>newAccount.personelInfo.accountType;
+            }
+            if(aut.ableToSetAuthority)
+            {
+                std::cout<<"PLEASE SET AUTHORIZATION OF THIS ACCOUNT : "<<std::endl;
+                std::cout<<"------------------------------------"<<std::endl;
+                std::cout<<"ABLE TO ADD NEW ACCOUNT (1 OR 2) : "<<std::endl;
+                std::cin>>newAccount.aviableAuthorization.ableToAddNewAccount;
+                std::cout<<"ABLE TO SET DELETE ANY ACCOUNT (1 OR 2) : "<<std::endl;
+                std::cin>>newAccount.aviableAuthorization.ableToDeleteAccount;
+                std::cout<<"ABLE TO SET SET ANY AUTHORITY (1 OR 2) : "<<std::endl;
+                std::cin>>newAccount.aviableAuthorization.ableToSetAuthority;
+            }
+            // SendAdminResults(newAccount, BankManagerCommentTypes::CREATE_NEW_ACCOUNT);
+            break;
+        case 2:
+            std::cout<<"Edit Account \n";
+            break;
+        case 3:
+            break;
+        case 4:
+            std::cout<<"thanx for visiting... \n";
+            // stopped.store(true);
+            // SendExitCb_(true);
+            break;;
+
+        default:
+            std::cout<<"thanx for visiting..."<<std::endl;
+            break;
+    };
 
 }
 
@@ -75,7 +113,8 @@ void BaseMenu::MainMenuRunner()
     switch(opt)
     {
         case 1:
-            std::cout<<"create account"<<std::endl;
+            CommentType_ = BankManagerCommentTypes::CREATE_NEW_ACCOUNT;
+
             break;
         case 2:
             {
@@ -106,8 +145,8 @@ void BaseMenu::MainMenuRunner()
         
         case 3:
             std::cout<<"thanx for visiting... \n";
-            stopped.store(true);
-            SendExitCb_(true);
+            // stopped.store(true);
+            // SendExitCb_(true);
             break;;
 
         default:
@@ -115,6 +154,10 @@ void BaseMenu::MainMenuRunner()
             break;
     };
         
+}
+void BaseMenu::CustomerSecreenMenu()
+{
+    //not defined
 }
 
 void BaseMenu::menuController()
@@ -145,6 +188,7 @@ void BaseMenu::menuController()
             OUTRO(4);
             std::cin>>opt;
             checkChoice(opt);
+            enableChoice.load() ? AdminMenuRunner():throw std::runtime_error("! enable choice ");
             break;
         case MenuTypes::CUSTOMER_SCREEN:
             std::cout<<"not imlemented yet \n";

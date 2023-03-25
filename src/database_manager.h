@@ -20,7 +20,7 @@ public:
     int ConnectDatabase();
     bool UserAuthenticate(std::string email_, std::string password_);
     UserInfo GetUserFromDatabase(std::string email, std::string password);
-    void SetUserToDabase();
+    bool AddNewAccount(UserInfo newAcc);
     
    
 };

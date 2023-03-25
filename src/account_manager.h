@@ -92,8 +92,7 @@ public:
 
     }
     bool SignIn(std::string email, std::string password);
-    // bool CreateAccount(std::string name, std::string surname, std::string password);
-
+    bool CreateAccount(UserInfo newAccount);
     std::string getAccountType();
     bool ExitAccount();
 };

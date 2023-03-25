@@ -28,6 +28,14 @@ std::string AccountManager::getAccountType()
     return info.personelInfo.accountType;
 }
 
+
+bool AccountManager::CreateAccount(UserInfo newAccount)
+{
+    //send database directly;
+    databasePtr->
+}
+
+
 bool AccountManager::ExitAccount()
 {
     if(accountPtr != nullptr)

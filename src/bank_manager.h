@@ -6,29 +6,6 @@
 #include <menu.h>
 
 
-class CommentTypes
-{
-
-public:
-    virtual void EXIT() = 0;
-};
-
-class CustomerCommetType : public CommentTypes
-{
-
-};
-
-class AdminCommentTypes : public CommentTypes
-{
-
-
-public:
-
-};
-
-
-
-
 class BankManager
 {
 private:

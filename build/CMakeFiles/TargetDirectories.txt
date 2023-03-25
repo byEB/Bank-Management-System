@@ -1,0 +1,8 @@
+/Users/emrahbayindir/Desktop/cppStudyRepo/Bank-Management-System/build/CMakeFiles/runApp.dir
+/Users/emrahbayindir/Desktop/cppStudyRepo/Bank-Management-System/build/CMakeFiles/edit_cache.dir
+/Users/emrahbayindir/Desktop/cppStudyRepo/Bank-Management-System/build/CMakeFiles/rebuild_cache.dir
+/Users/emrahbayindir/Desktop/cppStudyRepo/Bank-Management-System/build/src/CMakeFiles/my_lib.dir
+/Users/emrahbayindir/Desktop/cppStudyRepo/Bank-Management-System/build/src/CMakeFiles/edit_cache.dir
+/Users/emrahbayindir/Desktop/cppStudyRepo/Bank-Management-System/build/src/CMakeFiles/rebuild_cache.dir
+/Users/emrahbayindir/Desktop/cppStudyRepo/Bank-Management-System/build/tests/CMakeFiles/edit_cache.dir
+/Users/emrahbayindir/Desktop/cppStudyRepo/Bank-Management-System/build/tests/CMakeFiles/rebuild_cache.dir
